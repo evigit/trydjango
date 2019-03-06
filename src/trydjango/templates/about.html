@@ -1,11 +1,25 @@
-{% extends "base.html" %}
+{% extends "base.html" %} <!--  -->
 
 {% block content %}
 <h1>About</h1>
+
+<!--<h3>{{ title|capfirst }}</h3>  capfirst capitilizing first letter  -->
+<!--<h3>{{ title|capfirst|upper }}</h3>  caps every letter  -->
+<h3>{{ title|title }}</h3>
+<h3>{{ title|upper }}</h3>
+<h3>{{ title }}</h3>
 <p>This is a template</p>
 
+
+{{my_html|safe}}		
+{{my_html|striptags}} 	<!-- basically strip <h1> tags -->
+{{my_html|slugify}}		<!-- 'slug' version, more URL safe version -->
+{{my_html|striptags|slugify}} <!-- clear advance looking URL? Take this one! -->
+{{my_html}}
+
+
 <p>
-{{ my_text }}, {{ my_number }}
+, {{ my_number }}
 {{my_list}}
 </p>
 
@@ -15,8 +29,23 @@
 </ul>
 
 <ul>
-{% for my_sub_item in my_list %}
-	<li>{{ forloop.counter }} - {{my_sub_item }}</li>
+{% for abc in my_list %}
+	{% if abc == 312 %}
+		<li>{{ forloop.counter }} - {{ abc|add:22 }}</li>
+	{% elif abc == "Abc" %}
+		<li>This is not the network</li>
+	{% else %}
+		<li>{{ forloop.counter }} - {{ abc }}</li>
+	{% endif %}
 {% endfor %}
 </ul>
+
+
+{% comment "oouch note" %}
+	<p>also I could make comments like this </p>
+{% endcomment %}
+
 {% endblock content %}
+
+<!--tags on this page are :
+Provided by Django is extends#1 and other ones are block#3,for#19,if#20,comment#31 and there are even more! -->
